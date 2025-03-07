@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle financeiro</title>
+</head>
+<body>
+    <script>
+        // Janeiro
+        let salarioJan = 3000
+        let aluguelJan = 1000
+        let contaDeLuzJan = 200
+        let contaDeAguaJan = 100
+        let internetJan = 100
+        let transporteJan = 300
+        let lazerJan = 300
+        let alimentacaoJan = 500
+        let saldoJan = salarioJan - aluguelJan - contaDeLuzJan - contaDeAguaJan - internetJan - transporteJan - lazerJan - alimentacaoJan
+        console.log('----- Janeiro -----')
+        console.log('Saldo parcial de Janeiro')
+        console.log(saldoJan)
+        let estaNegativoJan = saldoJan < 0
+        if (estaNegativoJan) {
+            console.log('Juros de Janeiro')
+            let jurosJan = saldoJan * 0.1
+            console.log(jurosJan)
+            let totNegJan = saldoJan + jurosJan
+        } else {
+            console.log('Rendimentos Janeiro')
+            let rendJan = saldoJan * 0.005
+            console.log(rendJan)
+            let totPosJan = saldoJan + rendJan
+            console.log('Saldo total de Janeiro')
+            console.log(totPosJan)
+        }
+
+        // Fevereiro
+        let salarioFev = 3000
+        let aluguelFev = 1200
+        let contaDeLuzFev = 250
+        let contaDeAguaFev = 100
+        let internetFev = 100
+        let transporteFev = 500
+        let lazerFev = 0
+        let alimentacaoFev = 1000
+        let saldoFev = salarioFev - aluguelFev - contaDeAguaFev - contaDeLuzFev - internetFev - transporteFev - lazerFev - alimentacaoFev;
+        console.log('----- Fevereiro -----')
+        console.log('Saldo parcial de Fevereiro')
+        console.log(saldoFev)
+        let estaNegativoFev = saldoFev < 0
+        if (estaNegativoFev) {
+            console.log('Juros de Fevereiro')
+            let jurosFev = saldoFev * 0.1
+            console.log (jurosFev)
+            let totNegFev = saldoFev + jurosFev
+            console.log('Saldo total de Fevereiro')
+            console.log(totNegFev)
+        } else {
+            console.log('Rendimento Fevereiro')
+            let rendFev = saldoFev * 0.005
+            console.log(rendFev)
+            let totPosFev = saldoFev + rendFev
+            console.log('Saldo total de Fevereiro')
+            console.log(totPosFev)
+        }
+    </script>
+</body>
+</html>
