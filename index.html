@@ -7,63 +7,94 @@
 </head>
 <body>
     <script>
-        // Janeiro
-        let salarioJan = 3000
-        let aluguelJan = 1000
-        let contaDeLuzJan = 200
-        let contaDeAguaJan = 100
-        let internetJan = 100
-        let transporteJan = 300
-        let lazerJan = 300
-        let alimentacaoJan = 500
-        let saldoJan = salarioJan - aluguelJan - contaDeLuzJan - contaDeAguaJan - internetJan - transporteJan - lazerJan - alimentacaoJan
-        console.log('----- Janeiro -----')
-        console.log('Saldo parcial de Janeiro')
-        console.log(saldoJan)
-        let estaNegativoJan = saldoJan < 0
-        if (estaNegativoJan) {
-            console.log('Juros de Janeiro')
-            let jurosJan = saldoJan * 0.1
-            console.log(jurosJan)
-            let totNegJan = saldoJan + jurosJan
-        } else {
-            console.log('Rendimentos Janeiro')
-            let rendJan = saldoJan * 0.005
-            console.log(rendJan)
-            let totPosJan = saldoJan + rendJan
-            console.log('Saldo total de Janeiro')
-            console.log(totPosJan)
+
+        function arredondar (valor) {
+            return Math.round(valor * 100) / 100
         }
 
-        // Fevereiro
-        let salarioFev = 3000
-        let aluguelFev = 1200
-        let contaDeLuzFev = 250
-        let contaDeAguaFev = 100
-        let internetFev = 100
-        let transporteFev = 500
-        let lazerFev = 0
-        let alimentacaoFev = 1000
-        let saldoFev = salarioFev - aluguelFev - contaDeAguaFev - contaDeLuzFev - internetFev - transporteFev - lazerFev - alimentacaoFev;
-        console.log('----- Fevereiro -----')
-        console.log('Saldo parcial de Fevereiro')
-        console.log(saldoFev)
-        let estaNegativoFev = saldoFev < 0
-        if (estaNegativoFev) {
-            console.log('Juros de Fevereiro')
-            let jurosFev = saldoFev * 0.1
-            console.log (jurosFev)
-            let totNegFev = saldoFev + jurosFev
-            console.log('Saldo total de Fevereiro')
-            console.log(totNegFev)
-        } else {
-            console.log('Rendimento Fevereiro')
-            let rendFev = saldoFev * 0.005
-            console.log(rendFev)
-            let totPosFev = saldoFev + rendFev
-            console.log('Saldo total de Fevereiro')
-            console.log(totPosFev)
+        function calcularJuros (valor) {
+            // let juros = valor * 0.1
+            let juros = arredondar(valor * 0.1)
+            return juros
         }
+
+        function calcularRendimento (valor) {
+            // let rendimento = valor * 0.005
+            let rendimento = arredondar(valor * 0.005)
+            console.log(rendimento)
+            return rendimento
+        }
+
+        function calcularSaldo (mes, saldoInicial, lancamentos) {
+            console.log(mes)
+            let saldo = saldoInicial
+            for (lancamento of lancamentos) {
+                if (lancamento.tipo === "receita") {
+                    saldo += lancamento.valor
+                } 
+                if (lancamento.tipo === "despesa") {
+                    saldo -= lancamento.valor
+                }
+            }
+            let estaNegativo = saldo < 0
+            if (estaNegativo) {
+                let juros = calcularJuros(saldo)
+                saldo = arredondar(saldo + juros)
+            } else {
+                let rendimento = calcularRendimento(saldo)
+                saldo = arredondar(saldo + rendimento)
+            }
+            return saldo
+        }
+
+        // Janeiro
+        let saldoInicial = 0
+        let lancamentosJaneiro = [
+            {categoria: "Salário", tipo: "receita", valor: 3000},
+            {categoria: "Aluguel", tipo: "despesa", valor: 1000},
+            {categoria: "Conta de Luz", tipo: "despesa", valor: 200},
+            {categoria: "Conta de Água", tipo: "despesa", valor: 100},
+            {categoria: "Internet", tipo: "despesa", valor: 100},
+            {categoria: "Transporte", tipo: "despesa", valor: 300},
+            {categoria: "Lazer", tipo: "despesa", valor: 300},
+            {categoria: "Alimentação", tipo: "despesa", valor: 500},
+            {categoria: "Condominio", tipo: "despesa", valor: 300},
+            {categoria: "Farmácia", tipo: "despesa", valor: 100}
+        ]
+        let saldoJaneiro = calcularSaldo("----- Janeiro -----", saldoInicial, lancamentosJaneiro)
+        console.log(saldoJaneiro)
+
+        // Fevereiro
+        let lancamentosFevereiro = [
+            {categoria: "Salário", tipo: "receita", valor: 3000},
+            {categoria: "Aluguel", tipo: "despesa", valor: 1200},
+            {categoria: "Conta de Luz", tipo: "despesa", valor: 250},
+            {categoria: "Conta de Água", tipo: "despesa", valor: 100},
+            {categoria: "Internet", tipo: "despesa", valor: 100},
+            {categoria: "Transporte", tipo: "despesa", valor: 500},
+            {categoria: "Alimentação", tipo: "despesa", valor: 1000},
+            {categoria: "Condominio", tipo: "despesa", valor: 400}
+        ]
+        let saldoFevereiro = calcularSaldo('----- Fevereiro -----', saldoJaneiro, lancamentosFevereiro)
+        console.log(saldoFevereiro)
+
+        //Março
+        let lancamentosMarco = [
+            {categoria: "Salário", tipo: "receita", valor: 4000},
+            {categoria: "Aluguel", tipo: "despesa", valor: 1200},
+            {categoria: "Conta de Luz", tipo: "despesa", valor: 200},
+            {categoria: "Conta de Água", tipo: "despesa", valor: 100},
+            {categoria: "Internet", tipo: "despesa", valor: 200},
+            {categoria: "Transporte", tipo: "despesa", valor: 500},
+            {categoria: "Lazer", tipo: "despesa", valor: 800},
+            {categoria: "Alimentação", tipo: "despesa", valor: 1000},
+            {categoria: "Condominio", tipo: "despesa", valor: 400},
+        ]
+        let saldoMarco = calcularSaldo('----- Março -----', saldoFevereiro, lancamentosMarco)
+        console.log(saldoMarco)
+
+        console.log('----- Acumulado ano -----')
+        console.log(saldoMarco)
     </script>
 </body>
 </html>
